@@ -3,7 +3,7 @@
 #include <FastLED.h>
 #include <ESP8266WiFi.h>
 #include "WifiSecret.h"
-
+//This has the defines for the wifi ssid and password
 
 // defines for the LEDs
 #define DATA_PIN    15
