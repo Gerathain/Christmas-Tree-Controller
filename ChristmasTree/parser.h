@@ -1,0 +1,1 @@
+void checkNewPattern(int* pattern);

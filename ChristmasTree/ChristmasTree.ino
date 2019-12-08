@@ -11,6 +11,8 @@
 #include "WifiSecret.h"
 //This has the defines for the wifi ssid and password
 
+#include "parser.h"
+
 // defines for the LEDs
 #define DATA_PIN    15
 #define LED_TYPE    WS2811
@@ -114,74 +116,7 @@ void setup()
   Serial.println("Ready");
 }
 
-void checkNewMode() {
-  // Check if a client has connected
-  WiFiClient client = server.available();
-  if (!client) {
-    return;
-  }
 
-  // Wait until the client sends some data
-  Serial.println("new client");
-  unsigned long timeout = millis() + 3000;
-  while (!client.available() && millis() < timeout) {
-    delay(1);
-  }
-  if (millis() > timeout) {
-    Serial.println("timeout");
-    client.flush();
-    client.stop();
-    return;
-  }
-
-  // Read the first line of the request
-  String req = client.readStringUntil('\r');
-  Serial.println(req);
-  client.flush();
-
-  // Check if this command is about controlling the PUS
-  if( req.indexOf("/power/") != -1) 
-  {
-    if( req.indexOf("/on") != -1)
-    {
-      digitalWrite(POWER_PIN, HIGH);
-    }
-    if( req.indexOf("/off") != -1)
-    {
-      digitalWrite(POWER_PIN, LOW);
-    }
-    return; // we can't process changing the pattern and the power in one instruction
-  }
-
-  // Check if this command is about changing the pattern of the lights
-  if (req.indexOf("/gpio/0") != -1) {
-    mode = 0;
-    // clear the lights
-    FastLED.clear();
-    FastLED.show();
-  } else if (req.indexOf("/gpio/1") != -1) {
-    mode = 1;
-  } else {
-    Serial.println("invalid request");
-    client.print("HTTP/1.1 404 Not Found\r\nContent-Type: text/html\r\n\r\n<!DOCTYPE HTML>\r\n<html><body>Not found</body></html>");
-    return;
-  }
-
-  client.flush();
-
-  // Prepare the response
-  String s = "HTTP/1.1 200 OK\r\nContent-Type: text/html\r\n\r\n<!DOCTYPE HTML>\r\n<html>\r\nThe christmas tree is now ";
-  s += (mode) ? "on" : "off";
-  s += "</html>\n";
-
-  // Send the response to the client
-  client.print(s);
-  delay(1);
-  Serial.println("Client disconnected");
-
-  // The client will actually be disconnected
-  // when the function returns and 'client' object is detroyed
-}
 
 // rainbow patter for the LEDs
 void rainbow() 
