@@ -139,7 +139,21 @@ void checkNewMode() {
   Serial.println(req);
   client.flush();
 
-  // Match the request
+  // Check if this command is about controlling the PUS
+  if( req.indexOf("/power/") != -1) 
+  {
+    if( req.indexOf("/on") != -1)
+    {
+      digitalWrite(POWER_PIN, HIGH);
+    }
+    if( req.indexOf("/off") != -1)
+    {
+      digitalWrite(POWER_PIN, LOW);
+    }
+    return; // we can't process changing the pattern and the power in one instruction
+  }
+
+  // Check if this command is about changing the pattern of the lights
   if (req.indexOf("/gpio/0") != -1) {
     mode = 0;
     // clear the lights
