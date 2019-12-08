@@ -17,10 +17,10 @@ void negResponse(WiFiClient* client)
 	return;
 }
 
-void checkNewMode(int* pattern)
+void checkNewMode(int* pattern, WiFiServer* server)
 {
   // Check if a client has connected
-	WiFiClient client = server.available();
+	WiFiClient client = server->available();
 	if (!client) {
 		return;
 	}
@@ -60,11 +60,12 @@ void checkNewMode(int* pattern)
   }
 
   // Check if this command is about changing the pattern of the lights
-  if (int patternIdStart = req.indexOf("/pattern/"); patternIdStart != -1) {
+  int patternIdStart = req.indexOf("/pattern/"); 
+  if (patternIdStart != -1) {
     // get the id of the pattern out of the request
-  	int patternIdStart += 9;
+  	patternIdStart += 9;
   	int patternIdEnd = req.indexOf("/", patternIdStart);
-  	*pattern = req.subString(patternIdStart, patternIdEnd).toInt();
+  	*pattern = req.substring(patternIdStart, patternIdEnd).toInt();
   	// The pattern still needs to be range checked or something to ensure that it is a valid pattern
 
     posResponse(&client);

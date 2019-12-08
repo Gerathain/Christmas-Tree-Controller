@@ -21,8 +21,6 @@
 #define BRIGHTNESS          96
 #define FRAMES_PER_SECOND  120
 
-#define POWER_PIN   2
-
 // Create an instance of the server
 // specify the port to listen on as an argument
 WiFiServer server(80);
@@ -129,7 +127,7 @@ void loop()
 {
   ArduinoOTA.handle();
   
-  checkNewMode(); // This is just checking if someone is trying to connect to the server
+  checkNewMode(&mode, &server); // This is just checking if someone is trying to connect to the server
 
   if (mode)
   {
