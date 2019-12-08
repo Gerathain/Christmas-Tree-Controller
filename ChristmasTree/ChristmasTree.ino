@@ -26,7 +26,7 @@
 WiFiServer server(80);
 
 CRGB leds[NUM_LEDS];
-int mode = 0;
+int pattern = 0;
 
 uint8_t gHue = 0; //base colour for the rainbow TODO remove
 
@@ -127,9 +127,9 @@ void loop()
 {
   ArduinoOTA.handle();
   
-  checkNewMode(&mode, &server); // This is just checking if someone is trying to connect to the server
+  checkNewMode(&pattern, &server); // This is just checking if someone is trying to connect to the server
 
-  if (mode)
+  if (pattern)
   {
     rainbow();
     // send the 'leds' array out to the actual LED strip
