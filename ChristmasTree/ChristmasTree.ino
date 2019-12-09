@@ -28,8 +28,10 @@ void (* patterns[])(CRGB*) = {rainbow, warmGlitter};
 CRGB leds[NUM_LEDS];
 int pattern = 0;
 
+// This wrapper is basically just needed to pass these variables into the mode checker
 void parseConnection()
 {
+  checkNewMode(&pattern, &server);
   return;
 }
 
