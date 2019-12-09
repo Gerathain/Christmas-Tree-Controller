@@ -24,8 +24,6 @@ WiFiServer server(80);
 CRGB leds[NUM_LEDS];
 int pattern = 0;
 
-uint8_t gHue = 0; //base colour for the rainbow TODO remove
-
 void setupWifi()
 {
   // Connect to WiFi network
@@ -122,9 +120,6 @@ void loop()
     // send the 'leds' array out to the actual LED strip
     FastLED.show();  
     // insert a delay to keep the framerate modest
-    FastLED.delay(1000/FRAMES_PER_SECOND); 
-
-    // do some periodic updates
-    EVERY_N_MILLISECONDS( 20 ) { gHue++; } // slowly cycle the "base color" through the rainbow
+    FastLED.delay(1000/FRAMES_PER_SECOND);
   }
 }
