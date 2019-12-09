@@ -126,7 +126,7 @@ void setup()
 
 void loop()
 {  
-  checkNewMode(&pattern, &server); // This is just checking if someone is trying to connect to the server
+  server.handleClient(); // This handles the updating of the code and handling connections to change the current pattern
 
   patterns[pattern](leds);
 
