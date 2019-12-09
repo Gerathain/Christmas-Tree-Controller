@@ -21,6 +21,8 @@
 // specify the port to listen on as an argument
 WiFiServer server(80);
 
+// This is the array of all of the possible patterns
+void (* patterns[])(CRGB*) = {rainbow};
 CRGB leds[NUM_LEDS];
 int pattern = 0;
 
@@ -114,12 +116,10 @@ void loop()
   
   checkNewMode(&pattern, &server); // This is just checking if someone is trying to connect to the server
 
-  if (pattern)
-  {
-    rainbow();
-    // send the 'leds' array out to the actual LED strip
-    FastLED.show();  
-    // insert a delay to keep the framerate modest
-    FastLED.delay(1000/FRAMES_PER_SECOND);
-  }
+  patterns[pattern](leds);
+
+  // send the 'leds' array out to the actual LED strip
+  FastLED.show();  
+  // insert a delay to keep the framerate modest
+  FastLED.delay(1000/FRAMES_PER_SECOND);
 }
