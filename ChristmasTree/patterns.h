@@ -7,3 +7,4 @@
 #define NUM_LEDS    100
 
 extern void rainbow(CRGB* leds);
+extern void warmGlitter(CRGB* leds);

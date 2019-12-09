@@ -21,7 +21,7 @@
 WiFiServer server(80);
 
 // This is the array of all of the possible patterns
-void (* patterns[])(CRGB*) = {rainbow};
+void (* patterns[])(CRGB*) = {rainbow, warmGlitter};
 CRGB leds[NUM_LEDS];
 int pattern = 0;
 
