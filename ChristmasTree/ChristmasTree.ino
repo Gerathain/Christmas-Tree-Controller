@@ -1,8 +1,3 @@
-// This is needed as the ESP fires interrups that can take longer than 50us to process and so
-// disrupt the sending of data to the lights 
-#define FASTLED_ALLOW_INTERRUPTS 0
-
-#include <FastLED.h>
 #include <ESP8266WiFi.h>
 #include <ESP8266mDNS.h>
 #include <WiFiUdp.h>
@@ -12,6 +7,7 @@
 //This has the defines for the wifi ssid and password
 
 #include "parser.h"
+#include "patterns.h"
 
 // defines for the LEDs
 #define DATA_PIN    15
@@ -112,15 +108,6 @@ void setup()
   // End code for OTA updates
   
   Serial.println("Ready");
-}
-
-
-
-// rainbow patter for the LEDs
-void rainbow() 
-{
-  // FastLED's built-in rainbow generator
-  fill_rainbow( leds, NUM_LEDS, gHue, 7);
 }
 
 void loop()
