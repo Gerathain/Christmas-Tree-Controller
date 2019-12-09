@@ -13,7 +13,6 @@
 #define DATA_PIN    15
 #define LED_TYPE    WS2811
 #define COLOR_ORDER GRB
-#define NUM_LEDS    100
 #define BRIGHTNESS          96
 #define FRAMES_PER_SECOND  120
 
