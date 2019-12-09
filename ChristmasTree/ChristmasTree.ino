@@ -19,7 +19,7 @@
 
 // Create an instance of the server
 // specify the port to listen on as an argument
-ESP8266WebServer server(11111);
+ESP8266WebServer server(80);
 const char* serverIndex = "<form method='POST' action='/update' enctype='multipart/form-data'><input type='file' name='update'><input type='submit' value='Update'></form>";
 const char* host = "esp8266-webupdate";
 
