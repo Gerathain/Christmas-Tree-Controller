@@ -54,6 +54,7 @@ void checkNewMode(int* pattern, WiFiServer* server)
 			digitalWrite(POWER_PIN, LOW);
 		} else {
 			negResponse(&client);
+      
 		}
 		posResponse(&client);
     return; // we can't process changing the pattern and the power in one instruction
@@ -70,9 +71,6 @@ void checkNewMode(int* pattern, WiFiServer* server)
 
     posResponse(&client);
   } 
-
-
-  negResponse(&client);
 
   client.flush();
 }
