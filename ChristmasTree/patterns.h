@@ -8,3 +8,4 @@
 
 extern void rainbow(CRGB* leds);
 extern void warmGlitter(CRGB* leds);
+extern void markPattern(CRGB* leds);

@@ -24,7 +24,7 @@ const char* serverIndex = "<form method='POST' action='/update' enctype='multipa
 const char* host = "esp8266-webupdate";
 
 // This is the array of all of the possible patterns
-void (* patterns[])(CRGB*) = {rainbow, warmGlitter};
+void (* patterns[])(CRGB*) = {rainbow, warmGlitter, markPattern};
 CRGB leds[NUM_LEDS];
 int pattern = 0;
 
